@@ -1,6 +1,5 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import uuid from 'uuid';
 import ClassChoose from './components/ClassChoose';
 
 function App() {

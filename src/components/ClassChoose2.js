@@ -11,6 +11,7 @@ export default class ClassChoose extends Component {
 			possibleClasses: [],
 			students: StudentData,
 			//move to student list   display chosen students down a level then update students here and send as props
+			ChosenClassStudents: StudentData,
 		};
 	}
 	//move to student list
@@ -26,13 +27,18 @@ export default class ClassChoose extends Component {
 	}
 
 	handleChosenClass = (event) => {
-		this.setState({ chosenClass: event.target.value });
+		this.setState({ chosenClass: event.target.value }, () => {
+			const chosenStudents = this.state.students.filter(
+				(student) => student.sClass === this.state.chosenClass
+			);
+			this.setState({ ChosenClassStudents: chosenStudents });
+		});
 	};
 
 	// updateChosenClass = ////think
 
 	increaseClick = (id, e) => {
-		const updatedData = this.state.students.map((student) => {
+		const updatedData = this.state.ChosenClassStudents.map((student) => {
 			if (id === student.id) {
 				student[e.target.name] = student[e.target.name] + 1;
 				const timeElapsted = Date.now();
@@ -47,7 +53,7 @@ export default class ClassChoose extends Component {
 			return student;
 		});
 		this.setState({
-			students: updatedData,
+			ChosenClassStudents: updatedData,
 		});
 	};
 
@@ -55,7 +61,7 @@ export default class ClassChoose extends Component {
 		console.log('......');
 		this.setState((prevState) => {
 			return {
-				students: prevState.students.map((student) => {
+				ChosenClassStudents: prevState.ChosenClassStudents.map((student) => {
 					if (student.id === studentID) {
 						return {
 							...student,
@@ -125,8 +131,7 @@ export default class ClassChoose extends Component {
 					})}
 				</select>
 				<StudentList
-					students={this.state.students}
-					chosenClass={this.state.chosenClass}
+					ChosenClassStudents={this.state.ChosenClassStudents}
 					increaseClick={this.increaseClick}
 					delClick={this.delClick}
 				/>
