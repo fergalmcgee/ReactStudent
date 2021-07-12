@@ -4,7 +4,11 @@ const ClassData = [
 		comments: [
 			{
 				id: 1,
-				cText: 'cs1 First comment',
+				cText: 'cs1 First Comment',
+			},
+			{
+				id: 2,
+				cText: 'cs1 Second Comment',
 			},
 		],
 	},
